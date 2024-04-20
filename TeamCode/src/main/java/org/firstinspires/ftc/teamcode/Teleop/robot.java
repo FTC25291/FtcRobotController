@@ -37,15 +37,16 @@ Driver X Button
         - Allow claw angle to be changed & let RB and LB change that angle
             - Green
 Driver LT
-    Extending Arm
+    Extending Arm - Arm class button input function
 
 Driver RT
-    Retracting Arm
+    Retracting Arm - Arm class button input function
 
 Driver LB
-    Open Claw
+    Open Claw - Claw class button input function
+
 
 Driver RB
-    Close Claw
+    Close Claw - Claw class button input function
 
  */
