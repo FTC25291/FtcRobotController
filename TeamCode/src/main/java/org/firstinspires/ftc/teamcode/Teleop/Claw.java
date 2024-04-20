@@ -10,67 +10,54 @@
 //anything less means that that the claw needs to be turned so that it is parallel to the floor
 //coding override for a few positions
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 
-
-
-
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-@TeleOp(name="ClawController")
-public class ClawController extends LinearOpMode {
-    private DcMotor motorOpen1;
-    private DcMotor motorOpen2;
-    private DcMotor motorWrist;
-
-    private boolean manualOwnership = false;
-
-    @Override
-    public void runOpMode() {
-        // Initialize motors
-        motorOpen1 = hardwareMap.get(DcMotor.class, "motor_open1");
-        motorOpen2 = hardwareMap.get(DcMotor.class, "motor_open2");
-        motorWrist = hardwareMap.get(DcMotor.class, "motor_wrist");
-
-        // Set zero power behavior to brake for all motors
-        motorOpen1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motorOpen2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motorWrist.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        waitForStart();
-
-        while (opModeIsActive()) {
-            // Control the motors based on gamepad input if not in manual ownership
-            if (!manualOwnership) {
-                double openPower = -gamepad1.left_stick_y;
-                double wristPower = gamepad1.right_stick_x;
-
-                // Set motor powers
-                motorOpen1.setPower(openPower);
-                motorOpen2.setPower(openPower);
-                motorWrist.setPower(wristPower);
-
-                telemetry.addData("Open Power", openPower);
-                telemetry.addData("Wrist Power", wristPower);
-            } else {
-                telemetry.addData("Manual Control", "ENABLED");
-                telemetry.addData("Instructions", "Use manual controls to operate motors");
+public class Claw {
+    public void set_angle(String state, float arm_Angle){
+        this.state = state; //Assigns the state variable to the current State
+        this.armangle = arm_Angle;
+        if(this.armangle > 280 || 95 < this.armangle && this.armangle < 180 || this.armangle > 51 && this.armangle < 84){ // see's if the arm is outside the ranges it should be
+            // Red Flashing
+            this.claw_angle.setangle(revClawAngleMoter.Clawangle.0 Degrees);
+        }else{
+            if(this.state.equals("pickUp")){
+                this.claw_angle.setangle(revClawAngleMoter.Clawangle.0 Degrees)
             }
-
-            // Check if gamepad buttons are pressed to toggle manual ownership
-            if (gamepad1.a) {
-                manualOwnership = true;
-            } else if (gamepad1.b) {
-                manualOwnership = false;
+            if(this.state.equals("place")){
+                this.claw_angle.setangle(revClawAngleMoter.Clawangle.120 Degrees)
             }
-
-            telemetry.addData("Manual Ownership", manualOwnership ? "ENABLED" : "DISABLED");
-            telemetry.update();
+            if(this.state.equals("stowed")){
+                this.claw_angle.setangle(revClawAngleMoter.Clawangle.90 Degrees);
         }
     }
+
+    public void manual_angle(int Rt, int Lt){
+             if(this.state.equals("Lt")) {
+                 this.claw_angle.setangle(revPivotClawAngleMoter.Clawangle.x - 2 Degrees)
+             }
+             if(this.state.equals("Rt")){
+                     this.claw_angle.setangle(revPivotClawAngleMoter.Clawangle.x + 2 Degrees)
+            }
+        }
 }
+
+/*
+
+    Pickup
+
+    Stowed
+
+    Placing
+        - Placing angle - 220 - Snapps to this angle.
+
+    manual angle update, -> from the rt and lt to change the angle.
+
+
+ */
+
+
+
+
 
 
 
