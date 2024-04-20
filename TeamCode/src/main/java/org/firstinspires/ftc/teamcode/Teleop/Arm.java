@@ -26,34 +26,36 @@ Close Claw - Claw class button input function
 
 public class Arm {
 
-
-
-    if (gamepad1.y) {
+    if (gamepad1.y == true) {
         // Code to move into stowed position
         // Lock
         robotArm.stow();
     }
 
-        if (gamepad1.b) {
+    if (gamepad1.b == true) {
         // Code to move into placing position
         // Unlock
         robotArm.place();
     }
 
-        if (gamepad1.x) {
+    if (gamepad1.x == true) {
         // Code for moving into picking up position
         // Unlock
         robotArm.pick();
     }
 
-// Code for the extension and retraction of the telescoping arm
-        while (gamepad1.right_trigger == 1) {
+    // Code for the extension and retraction of the telescoping arm
+    while (gamepad1.right_trigger == true) {
         ExtendMotor.setPower(1);
+        robotArm.extend();
     }
 
-        while (gamepad1.left_trigger == 1) {
+    while (gamepad1.left_trigger == true) {
         ExtendMotor.setPower(-1);
+        robotArm.retract();
     }
+}
+
 
 
 }
