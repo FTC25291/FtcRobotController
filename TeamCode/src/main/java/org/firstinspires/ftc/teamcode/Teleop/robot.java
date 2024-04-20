@@ -15,26 +15,26 @@ Drive A Button
 
 Driver B Button
     PickUp
-        - Arm angle = 60 degrees
-        - Claw angle 90 degrees
-        - Extend to set position & let RT and LT extend and retract the arm
-        - Turn on the corresponding LED light
+        - Arm angle = 60 degrees - Arm Class angle input function
+        - Claw angle 90 degrees - Claw Class angle input function
+        - Extend to set position & let RT and LT extend and retract the arm - Arm Class set position function
+        - Turn on the corresponding LED light - LED Class sets the led lights to a sequence based off of arm angle (Arm class angle output)
             - Blue
 
 Driver Y Button
     Stow
-        - Arm angle = 90 degrees
-        - Claw angle = 180 degrees
-        - Fully retracted
-        - Turn on the corresponding LED light
+        - Arm angle = 90 degrees - Arm Class angle input function
+        - Claw angle = 180 degrees - Claw Class angle input function
+        - Fully retracted - Arm Class set position function
+        - Turn on the corresponding LED light - LED Class sets the led lights to a sequence based off of arm angle (Arm class angle output)
             - Flashing Yellow
 
 Driver X Button
     Placing
-        - Arm angle = 230 degrees
-        - Claw angle = 180 degrees
-        - Extend arm angle to set position & let RT and LT extend and retract the arm
-        - Extend claw angle to set position & let RB and LB extend and retract the arm
+        - Arm angle = 230 degrees - Arm Class angle input function
+        - Claw angle = 180 degrees - Claw Class angle input function
+        - Extend arm to set position & let RT and LT extend and retract the arm - Arm Class
+        - Allow claw angle to be changed & let RB and LB change that angle
             - Green
 Driver LT
     Extending Arm
