@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Claw {
         // Initialize servos
     private Servo servo1;
+    private Servo servo2;
+    private Servo servo3;
+    private Servo servo4;
     public void initservos(){
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo2 = hardwareMap.get(Servo.class, "servo2");
