@@ -50,3 +50,34 @@ Driver RB
     Close Claw - Claw class button input function
 
  */
+
+package org.firstinspires.ftc.teamcode.Teleop;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import org.firstinspires.ftc.teamcode.Teleop.LED;
+
+@TeleOp(group = "Primary")
+public class robot extends LinearOpMode {
+    private final LED status_lights = new LED();
+    private String state = "Stowed";
+    private float arm_angle = 90;
+    //This is most likly going to move to a seperate file
+
+    
+    @Override
+    public void runOpMode() throws InterruptedException {
+        initHardwear();
+        while(!isStarted()){}
+        waitForStart();
+        while(opModeIsActive()){
+            //This is whre running code is added
+        }
+    }
+
+    //Add all of the inits for the different subsystems here, allows for them to know what hardwear they are getting
+
+    public void initHardwear(){
+        status_lights.initLights();
+    }
+}
+

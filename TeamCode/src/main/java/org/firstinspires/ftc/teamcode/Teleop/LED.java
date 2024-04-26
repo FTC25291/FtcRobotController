@@ -1,7 +1,41 @@
 package org.firstinspires.ftc.teamcode.Teleop;
-
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+
+// Class to control LEDs based on arm position
+public class LED {
+    private RevBlinkinLedDriver ledLights;
+
+    // Method to initialize LED lights
+    public void initLights() {
+        ledLights = hardwareMap.get(RevBlinkinLedDriver.class, "LED");
+        ledLights.setPattern(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
+    }
+
+    // Method to set LED pattern based on arm angle and state
+    public void set_status(String state, float armAngle) {
+        if (armAngle > 280 || (95 < armAngle && armAngle < 180) || (armAngle > 51 && armAngle < 84)) {
+            // Red Flashing for broken state
+            ledLights.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_RED);
+        } else {
+            // Set LED pattern based on state
+            switch (state) {
+                case "pickUp":
+                    ledLights.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+                    break;
+                case "place":
+                    ledLights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+                    break;
+                case "stowed":
+                    ledLights.setPattern(RevBlinkinLedDriver.BlinkinPattern.CP1_BREATH_SLOW);
+                    break;
+                default:
+                    // Handle invalid state
+                    break;
+            }
+        }
+    }
+}
 
 /*
     Set LED colors based on Arm Position
@@ -12,37 +46,3 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
     If red allow overide code
     Fetch code from arm.java
  */
-
-//makes the class for the Led, allows for the creation of class specific variables
-public class LED {
-    //RevBlinkinLedDriver led_Lights;
-    private String state;
-    private float armangle;
-    //Assigns the led_lights variable to the mapping for the led controller
-    led_Lights = HardwareMap.get(RevBlinkinLedDriver.class, "lights");
-
-    public LED (String state, float arm_Angle, int arm_angle){
-        this.state = state;// Constructor that makes the state variable
-        this.armangle = arm_angle;// Constructor that makes the state variable
-    }
-
-    public void set_status(String state, float arm_Angle){
-        this.state = state; //Assigns the state variable to the current State
-        this.armangle = arm_Angle;
-        if(this.armangle > 280 || 95 < this.armangle && this.armangle < 180 || this.armangle > 51 && this.armangle < 84){ // see's if the arm is outside the ranges it should be
-            // Red Flashing
-            this.led_Lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_RED);// if its outside it will set the leds to flashing red
-        }else{
-            if(this.state.equals("pickUp")){
-                this.led_Lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);//Compares the state and sets the color to blue
-            }
-            if(this.state.equals("place")){
-                this.led_Lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);//Compares the state and sets the color to green
-            }
-            if(this.state.equals("stowed")){
-                this.led_Lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.CP1_BREATH_SLOW);//Compares the state and sets the color to flashing yellow
-            }
-        }
-    }
-
-}
