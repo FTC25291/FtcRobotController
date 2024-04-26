@@ -1,19 +1,48 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
         // Initialize servos
-    private Servo servo1;
-    private Servo servo2;
+    private Servo clawServoright;
+    private Servo clawServoleft;
     private Servo servo3;
     private Servo servo4;
+    private final int closed = 0;
+    private final int open = 45;
+
+    private final int pickup_angle = 0;
+    
+
     public void initservos(){
-        servo1 = hardwareMap.get(Servo.class, "servo1");
-        servo2 = hardwareMap.get(Servo.class, "servo2");
+        clawServoright = hardwareMap.get(Servo.class, "servo1");
+        clawServoleft = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         servo4 = hardwareMap.get(Servo.class, "servo4");
     //Add servo hardware creation
+
+    //Class for wrist rotation
+
+    //Class for claw servos
+
+
+    public void claw_servos(String state, String claw_State){
+        if(state == "stowed"){
+            clawServoright.setangle(closed);
+            clawServoleft.setangle(closed);
+        } else {
+            switch (claw_State) {
+                case "right_open":
+                    clawServoright.setangle(open);
+                    break;
+                case "right_close":
+                    clawServoright.setangle(closed);
+        }
+    }
+
 
     public void set_angle(String state, float arm_Angle){
         if(arm_Angle > 280 || 95 < arm_Angle && arm_Angle < 180 || arm_Angle > 51 && arm_Angle < 84){ // see's if the arm is outside the ranges it should be
