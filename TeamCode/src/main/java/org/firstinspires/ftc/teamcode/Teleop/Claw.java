@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
+import com.qualcomm.robotcore.hardware.Servo;
+
 public class Claw {
-hardware.mappublic void runOpMode() {
         // Initialize servos
-    public void initservos() {
+    private Servo servo1;
+    public void initservos(){
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");

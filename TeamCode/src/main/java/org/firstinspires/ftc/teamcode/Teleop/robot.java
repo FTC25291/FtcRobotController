@@ -63,7 +63,7 @@ public class robot extends LinearOpMode {
     private float arm_angle = 90;
     //This is most likly going to move to a seperate file
 
-    
+
     @Override
     public void runOpMode() throws InterruptedException {
         initHardwear();
