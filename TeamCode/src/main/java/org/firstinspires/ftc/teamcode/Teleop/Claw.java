@@ -1,7 +1,13 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
 public class Claw {
-
+hardware.mappublic void runOpMode() {
+        // Initialize servos
+    public void initservos() {
+        servo1 = hardwareMap.get(Servo.class, "servo1");
+        servo2 = hardwareMap.get(Servo.class, "servo2");
+        servo3 = hardwareMap.get(Servo.class, "servo3");
+        servo4 = hardwareMap.get(Servo.class, "servo4");
     //Add servo hardware creation
 
     public void set_angle(String state, float arm_Angle){
