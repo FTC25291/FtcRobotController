@@ -54,12 +54,17 @@ Driver RB
 package org.firstinspires.ftc.teamcode.Teleop;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import org.firstinspires.ftc.teamcode.Teleop.LED;
+import org.firstinspires.ftc.teamcode.Teleop.Arm;
+import org.firstinspires.ftc.teamcode.Teleop.Claw;
 
 @TeleOp(group = "Primary")
-public class Robot extends LinearOpMode {
+public class robot extends LinearOpMode {
     private final LED status_lights = new LED();
+    private final Arm robotArm = new Arm();
+    private final Claw robotClaw = new Claw();
     private String state = "Stowed";
-    private float arm_angle = 90;
+    private final float arm_angle = 90;
     //This is most likely going to move to a Separate file
 
 
@@ -73,10 +78,10 @@ public class Robot extends LinearOpMode {
         }
     }
 
-    //Add all of the inits for the different subsystems here, allows for them to know what hardwear they are getting
-
     public void initHardware(){
         status_lights.initLights();
+        robotArm.initArm();
+        robotClaw.initClaw();
     }
 }
 

@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode.Teleop;
-
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
@@ -13,73 +10,40 @@ public class Claw {
     private Servo wristservoleft;
     private final int closed = 0;
     private final int open = 45;
-
     private final int pickup_angle = 0;
-
     private final int stowed_angle = 90;
     private final int parallel_angle = 0;
     private final int dropping_angle = 200;
-    
 
-    public void initservos(){
+    public void initClaw() {
         clawServoright = hardwareMap.get(Servo.class, "servo1");
         clawServoleft = hardwareMap.get(Servo.class, "servo2");
         wristservoright = hardwareMap.get(Servo.class, "servo3");
         wristservoleft = hardwareMap.get(Servo.class, "servo4");
-    //Add servo hardware creation
-
-    //Class for wrist rotation
-
-    //Class for claw servos
-
-
-    public void claw_servos(String state, String claw_State){
-        if(state == "stowed"){
-            clawServoright.setangle(closed);
-            clawServoleft.setangle(closed);
-        } else {
-            switch (claw_State) {
-                case "right_open":
-                    clawServoright.setangle(open);
-                    break;
-                case "right_close":
-                    clawServoright.setangle(closed);
-        }
     }
 
     public void claw_servos(String state, String claw_State){
-         if(state == "stowed"){
-             wristservoright.setangle(stowed_angle);
-             
-         if(state == "parallel_angle")
-             wristservoleft.setangle(parallel_angle);
-             wristservoright.setangle(parallel_angle
-         }
+            if (state == "stowed") {
+                clawServoright.setPosition(closed);
+                clawServoleft.setPosition(closed);
+            } else {
+                switch (claw_State) {
+                    case "right_open":
+                        clawServoright.setPosition(open);
+                        break;
+                    case "right_close":
+                        clawServoright.setPosition(closed);
+                }
             }
-
-    public void set_angle(String state, float arm_Angle){
-        if(arm_Angle > 280 || 95 < arm_Angle && arm_Angle < 180 || arm_Angle > 51 && arm_Angle < 84){ // see's if the arm is outside the ranges it should be
-            // Red Flashing
-            this.claw_angle.setangle(revClawAngleMoter.Clawangle.0 Degrees);
-        }else{
-            if(this.state.equals("pickUp")){
-                this.claw_angle.setangle(revClawAngleMoter.Clawangle.0 Degrees);
-            }
-            if(this.state.equals("place")){
-                this.claw_angle.setangle(revClawAngleMoter.Clawangle.120 Degrees);
-            }
-            if(this.state.equals("stowed")){
-                this.claw_angle.setangle(revClawAngleMoter.Clawangle.90 Degrees);
         }
-    }
 
-    public void manual_angle(int Rt, int Lt){
-             if(this.state.equals("Lt")) {
-                 this.claw_angle.setangle(revPivotClawAngleMoter.Clawangle.x - 2 Degrees);
-             }
-             if(this.state.equals("Rt")){
-                     this.claw_angle.setangle(revPivotClawAngleMoter.Clawangle.x + 2 Degrees);
-            }
+    public void wrist_servos(String state,String claw_State) {
+        switch (state) {
+            case "stowed":
+                wristservoright.setPosition(stowed_angle);
+            case "parallel_angle":
+                wristservoleft.setPosition(parallel_angle);
+                wristservoright.setPosition(parallel_angle);
         }
     }
 }
