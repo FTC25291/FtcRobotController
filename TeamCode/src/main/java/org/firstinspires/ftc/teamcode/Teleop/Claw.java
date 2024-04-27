@@ -9,19 +9,23 @@ public class Claw {
         // Initialize servos
     private Servo clawServoright;
     private Servo clawServoleft;
-    private Servo servo3;
-    private Servo servo4;
+    private Servo wristservoright;
+    private Servo wristservoleft;
     private final int closed = 0;
     private final int open = 45;
 
     private final int pickup_angle = 0;
+
+    private final int stowed_angle = 90;
+    private final int parallel_angle = 0;
+    private final int dropping_angle = 200;
     
 
     public void initservos(){
         clawServoright = hardwareMap.get(Servo.class, "servo1");
         clawServoleft = hardwareMap.get(Servo.class, "servo2");
-        servo3 = hardwareMap.get(Servo.class, "servo3");
-        servo4 = hardwareMap.get(Servo.class, "servo4");
+        wristservoright = hardwareMap.get(Servo.class, "servo3");
+        wristservoleft = hardwareMap.get(Servo.class, "servo4");
     //Add servo hardware creation
 
     //Class for wrist rotation
@@ -43,6 +47,15 @@ public class Claw {
         }
     }
 
+    public void claw_servos(String state, String claw_State){
+         if(state == "stowed"){
+             wristservoright.setangle(stowed_angle);
+             
+         if(state == "parallel_angle")
+             wristservoleft.setangle(parallel_angle);
+             wristservoright.setangle(parallel_angle
+         }
+            }
 
     public void set_angle(String state, float arm_Angle){
         if(arm_Angle > 280 || 95 < arm_Angle && arm_Angle < 180 || arm_Angle > 51 && arm_Angle < 84){ // see's if the arm is outside the ranges it should be
