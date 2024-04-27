@@ -57,12 +57,15 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Teleop.LED;
 import org.firstinspires.ftc.teamcode.Teleop.Arm;
 import org.firstinspires.ftc.teamcode.Teleop.Claw;
+import org.firstinspires.ftc.teamcode.Teleop.Drive;
 
 @TeleOp(group = "Primary")
 public class robot extends LinearOpMode {
     private final LED status_lights = new LED();
     private final Arm robotArm = new Arm();
     private final Claw robotClaw = new Claw();
+
+    private final Drive robotDrive = new Drive();
     private String state = "Stowed";
     private final float arm_angle = 90;
     //This is most likely going to move to a Separate file
@@ -75,6 +78,10 @@ public class robot extends LinearOpMode {
         waitForStart();
         while(opModeIsActive()){
             //This is where running code is added
+
+            // Add detection for different buttons that will run  curtain sequences
+            // for example a button changing a state should be able to update
+
         }
     }
 
@@ -82,6 +89,7 @@ public class robot extends LinearOpMode {
         status_lights.initLights();
         robotArm.initArm();
         robotClaw.initClaw();
+
     }
 }
 
