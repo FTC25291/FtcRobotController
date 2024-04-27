@@ -64,19 +64,40 @@ public class robot extends LinearOpMode {
     private final LED status_lights = new LED();
     private final Arm robotArm = new Arm();
     private final Claw robotClaw = new Claw();
-
     private final Drive robotDrive = new Drive();
-    private String state = "Stowed";
-    private final float arm_angle = 90;
-    //This is most likely going to move to a Separate file
-
 
     @Override
     public void runOpMode() throws InterruptedException {
+//hi
+        String state = "Stowed";
+        String clawState = "Stowed";
+        float arm_angle = 90;
+
         initHardware();
         while(!isStarted()){}
         waitForStart();
         while(opModeIsActive()){
+
+            boolean aButton = gamepad1.a;
+            boolean bButton = gamepad1.b;
+            boolean xButton = gamepad1.x;
+            boolean yButton = gamepad1.y;
+
+            if(bButton){ //Pickup
+                state = "pickUp";
+            }
+            if(xButton){ //Stowed
+                state = "stowed";
+            }
+            if(yButton){ //Place
+                state = "place";
+            }
+
+            robotArm.controlArm(state, gamepad1);
+            robotClaw.wrist_servos(state);
+            robotDrive.update_Drive(gamepad1);
+            status_lights.set_status(state,arm_angle);
+
             //This is where running code is added
 
             // Add detection for different buttons that will run  curtain sequences

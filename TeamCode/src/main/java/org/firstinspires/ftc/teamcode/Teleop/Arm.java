@@ -36,7 +36,7 @@ public class Arm {
             int place_length = 15;
 
             switch(state){
-                case"pickup":
+                case"pickUp":
                     setArmAngle(pickup);
                     setArmLength(pickup_length);
                 case"stowed":

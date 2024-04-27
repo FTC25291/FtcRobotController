@@ -37,7 +37,7 @@ public class Claw {
             }
         }
 
-    public void wrist_servos(String state,String claw_State) {
+    public void wrist_servos(String state) {
         switch (state) {
             case "stowed":
                 wristservoright.setPosition(stowed_angle);
