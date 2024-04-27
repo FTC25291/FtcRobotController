@@ -1,4 +1,4 @@
-/*
+package org.firstinspires.ftc.teamcode.Teleop;/*
 Imports
 
 - Arm angle = 60 degrees - Arm Class angle input function
@@ -24,20 +24,52 @@ Close Claw - Claw class button input function
 
 //Imports for the motors
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 public class Arm {
     private RevArmAngleMoter armAngle;
     private RobotArm robotArm;
     private ExtendMotor extendMotor;
     private Gamepad gamepad1;
 
-    public Arm(RevArmAngleMoter armAngle, RobotArm robotArm, ExtendMotor extendMotor, Gamepad gamepad1) {
-        this.armAngle = armAngle;
-        this.robotArm = robotArm;
-        this.extendMotor = extendMotor;
-        this.gamepad1 = gamepad1;
+    private final int pickup=40;
+    private final int pickup_length=10;
+    private final int stowed=90;
+    private final int stowed_length=0;
+    private final int place=200;
+    private final int place_length=15;
+    private DcMotor armLength;
+    private DcMotor armShoulder;
+    public void initArm() {
+        armLength = hardwareMap.get(DcMotor.class, "LengthMotor");
+        armShoulder = hardwareMap.get(DcMotor.class, "ShoulderAngle");
     }
 
-    public void controlArm() {
+    public void controlArm(String state, gamepad1) {
+        if (gamepad1.left_trigger){
+            armLength.setPower(1);
+            wait(0.1);
+            armLength.setPower(0);
+        } else if (gamepad1.right_trigger) {
+            armLength.setPower(-1);
+            wait(0.1);
+            armLength.setPower(0);
+        } else {
+            switch(state){
+                case"pickup":
+                    setArmAngle(pickup);
+                    setArmLength(pickup_length);
+                case"stowed":
+                    setArmAngle(stowed);
+                    setArmLength(stowed_length);
+                case"place":
+                    setArmAngle(place);
+                    setArmLength(place_length);
+            }
+        }
         if (gamepad1.y) {
             armAngle.setAngle(RevArmAngleMoter.ArmAngle.degrees90);
             robotArm.stow();
