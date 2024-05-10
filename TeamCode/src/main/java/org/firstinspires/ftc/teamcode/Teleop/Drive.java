@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Teleop;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,20 +11,25 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class Drive{
 
-    private DcMotor frontLeftMotor;
-    private DcMotor backLeftMotor;
-    private DcMotor frontRightMotor;
-    private DcMotor backRightMotor;
-    private IMU imu;
+    public DcMotor frontLeftMotor;
+    public DcMotor backLeftMotor;
+    public DcMotor frontRightMotor;
+    public DcMotor backRightMotor;
+    public IMU imu;
+    private HardwareMap hwMap;
+
+    public Drive(HardwareMap hardMap){
+        this.hwMap = hardMap;
+    }
 
     public void initDrive(){
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        frontLeftMotor = hwMap.dcMotor.get("frontLeftMotor");
+        backLeftMotor = hwMap.dcMotor.get("backLeftMotor");
+        frontRightMotor = hwMap.dcMotor.get("frontRightMotor");
+        backRightMotor = hwMap.dcMotor.get("backRightMotor");
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        IMU imu = hardwareMap.get(IMU.class, "imu");
+        imu = hwMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
@@ -33,7 +39,7 @@ public class Drive{
     public void update_Drive(Gamepad gamepad1){
         double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
         double x = gamepad1.left_stick_x;
-        double rx = gamepad1.right_stick_x;
+        double rx = -gamepad1.right_stick_x;
 
         // This button choice was made so that it is hard to hit on accident,
         // it can be freely changed based on preference.
