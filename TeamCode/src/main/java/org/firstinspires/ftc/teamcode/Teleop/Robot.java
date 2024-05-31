@@ -54,6 +54,8 @@ Driver RB
 package org.firstinspires.ftc.teamcode.Teleop;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.teamcode.Teleop.LED;
 import org.firstinspires.ftc.teamcode.Teleop.Arm;
 import org.firstinspires.ftc.teamcode.Teleop.Claw;
@@ -61,19 +63,28 @@ import org.firstinspires.ftc.teamcode.Teleop.Drive;
 
 @TeleOp(group = "Primary")
 public class robot extends LinearOpMode {
-    private final LED status_lights = new LED();
-    private final Arm robotArm = new Arm();
-    private final Claw robotClaw = new Claw();
-    private final Drive robotDrive = new Drive();
+
+    //private HardwareMap hwMap;
+    //private final LED status_lights = new LED();
+    //private final Arm robotArm = new Arm();
+    //private final Claw robotClaw = new Claw();
+    //private final Drive robotDrive = new Drive(hwMap);
+
+    private Drive robotDrive;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
-//hi
+
+        HardwareMap hwMap = hardwareMap;
+
+        robotDrive = new Drive(hwMap);
+
         String state = "Stowed";
         String clawState = "Stowed";
         float arm_angle = 90;
 
-        initHardware();
+        initHardware(hwMap);
         while(!isStarted()){}
         waitForStart();
         while(opModeIsActive()){
@@ -93,10 +104,10 @@ public class robot extends LinearOpMode {
                 state = "place";
             }
 
-            robotArm.controlArm(state, gamepad1);
-            robotClaw.wrist_servos(state);
+            //robotArm.controlArm(state, gamepad1);
+            //robotClaw.wrist_servos(state);
             robotDrive.update_Drive(gamepad1);
-            status_lights.set_status(state,arm_angle);
+            //status_lighths.set_status(state,arm_angle);
 
             //This is where running code is added
 
@@ -105,10 +116,11 @@ public class robot extends LinearOpMode {
         }
     }
 
-    public void initHardware(){
-        status_lights.initLights();
-        robotArm.initArm();
-        robotClaw.initClaw();
+    public void initHardware(HardwareMap hwMap){
+        robotDrive.initDrive();
+        //status_lights.initLights();
+        //robotArm.initArm();
+        //robotClaw.initClaw();
 
     }
 }
