@@ -101,8 +101,7 @@ public class robot extends LinearOpMode {
             //This is where running code is added
 
             // Add detection for different buttons that will run  curtain sequences
-            // for example a button changing a state should be able to update
-
+            // for example a button changing a state should be able to update  b    
         }
     }
 
