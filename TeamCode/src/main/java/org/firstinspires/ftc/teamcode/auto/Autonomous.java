@@ -24,17 +24,10 @@ public class Autonomous extends LinearOpMode {
         initHardware();
 
         waitForStart();
+//5 inch acceleration for forward so subtract 5 from desired location
+//4 inch acceleration for backward so subtract 4 from desired location
+        autodrive.update_Drive("left", 14);
 
-        autodrive.update_Drive("forward", 700);
-        autodrive.update_Drive("backward", 700);
-        autodrive.update_Drive("right", 700);
-        autodrive.update_Drive("left", 700);
-        autodrive.update_Drive("frontrightstrafe", 700);
-        autodrive.update_Drive("backleftstrafe", 700);
-        autodrive.update_Drive("frontleftstrafe", 700);
-        autodrive.update_Drive("backrightstrafe", 700);
-        autodrive.update_Drive("turnright90", 1000);
-        autodrive.update_Drive("turnleft90", 1000);
 
     }
 

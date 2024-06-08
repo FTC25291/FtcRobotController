@@ -27,9 +27,20 @@ public class autodrive{
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void update_Drive(String direction, int time) {
+    public void update_Drive(String direction, double DistanceInInches) {
+        // Wheel diameter (in inches)
+        double wheelDiameterInInches = 4.0; // Example value, replace with your actual wheel diameter
 
-        if(direction.equals("forward")) {
+        // Calculate the circumference of the wheels
+        double wheelCircumferenceInInches = Math.PI * wheelDiameterInInches;
+
+        // Constant speed (adjust as needed)
+        double speed = 2.6;
+
+        // Calculate the time (in milliseconds) based on the constant speed
+        int time = (int) (DistanceInInches / wheelCircumferenceInInches / speed * 1000);
+
+        if (direction.equals("forward")) {
             frontLeftMotor.setPower(0.5);
             frontRightMotor.setPower(0.5);
             backLeftMotor.setPower(0.5);
