@@ -26,7 +26,8 @@ public class Autonomous extends LinearOpMode {
         waitForStart();
 //5 inch acceleration for forward so subtract 5 from desired location
 //4 inch acceleration for backward so subtract 4 from desired location
-        autodrive.update_Drive("left", 14);
+        // When going 12 inches, went 8.25 inches
+        autodrive.update_Drive("left", 17.5);
 
 
     }
