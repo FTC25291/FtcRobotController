@@ -70,6 +70,8 @@ public class robot extends LinearOpMode {
     //private final Claw robotClaw = new Claw();
     //private final Drive robotDrive = new Drive(hwMap);
 
+    private ArmTemp robotArmTemp;
+
     private Drive robotDrive;
 
 
@@ -79,6 +81,7 @@ public class robot extends LinearOpMode {
         HardwareMap hwMap = hardwareMap;
 
         robotDrive = new Drive(hwMap);
+        robotArmTemp = new ArmTemp(hwMap);
 
         String state = "Stowed";
         String clawState = "Stowed";
@@ -107,6 +110,7 @@ public class robot extends LinearOpMode {
             //robotArm.controlArm(state, gamepad1);
             //robotClaw.wrist_servos(state);
             robotDrive.update_Drive(gamepad1);
+            robotArmTemp.controlArm(gamepad1);
             //status_lighths.set_status(state,arm_angle);
 
             //This is where running code is added
@@ -118,6 +122,7 @@ public class robot extends LinearOpMode {
 
     public void initHardware(HardwareMap hwMap){
         robotDrive.initDrive();
+        robotArmTemp.initArm();
         //status_lights.initLights();
         //robotArm.initArm();
         //robotClaw.initClaw();
