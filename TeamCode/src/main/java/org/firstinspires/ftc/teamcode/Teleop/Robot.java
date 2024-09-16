@@ -64,15 +64,16 @@ import org.firstinspires.ftc.teamcode.Teleop.Drive;
 @TeleOp(group = "Primary")
 public class robot extends LinearOpMode {
 
-    //private HardwareMap hwMap;
+    private HardwareMap hwMap;
     //private final LED status_lights = new LED();
     //private final Arm robotArm = new Arm();
     //private final Claw robotClaw = new Claw();
     //private final Drive robotDrive = new Drive(hwMap);
 
-    private ArmTemp robotArmTemp;
+    //private ArmTemp robotArmTemp;
 
     private Drive robotDrive;
+    private Claw robotClaw;
 
 
     @Override
@@ -81,7 +82,7 @@ public class robot extends LinearOpMode {
         HardwareMap hwMap = hardwareMap;
 
         robotDrive = new Drive(hwMap);
-        robotArmTemp = new ArmTemp(hwMap);
+        robotClaw = new Claw(hwMap);
 
         String state = "Stowed";
         String clawState = "Stowed";
@@ -108,9 +109,9 @@ public class robot extends LinearOpMode {
             }
 
             //robotArm.controlArm(state, gamepad1);
-            //robotClaw.wrist_servos(state);
+            robotClaw.claw_servos(gamepad1);
             robotDrive.update_Drive(gamepad1);
-            robotArmTemp.controlArm(gamepad1);
+            //robotArmTemp.controlArm(gamepad1);
             //status_lighths.set_status(state,arm_angle);
 
             //This is where running code is added
@@ -122,7 +123,8 @@ public class robot extends LinearOpMode {
 
     public void initHardware(HardwareMap hwMap){
         robotDrive.initDrive();
-        robotArmTemp.initArm();
+        robotClaw.initClaw();
+        //robotArmTemp.initArm();
         //status_lights.initLights();
         //robotArm.initArm();
         //robotClaw.initClaw();

@@ -1,49 +1,49 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
+import static java.lang.Thread.sleep;
+
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
-        // Initialize servos
+    // Initialize servos
     private Servo clawServoright;
     private Servo clawServoleft;
     private Servo wristservoright;
     private Servo wristservoleft;
     private final int closed = 0;
-    private final int open = 45;
-    private final int pickup_angle = 0;
-    private final int stowed_angle = 90;
-    private final int parallel_angle = 0;
-    private final int dropping_angle = 200;
+    private final float open = 0.3F;
 
-    public void initClaw() {
-        clawServoright = hardwareMap.get(Servo.class, "servo1");
-        clawServoleft = hardwareMap.get(Servo.class, "servo2");
-        wristservoright = hardwareMap.get(Servo.class, "servo3");
-        wristservoleft = hardwareMap.get(Servo.class, "servo4");
+    private HardwareMap hwMap;
+
+
+    public Claw(HardwareMap hardMap) {
+        this.hwMap = hardMap;
     }
 
-    public void claw_servos(String state, String claw_State){
-            if (state == "stowed") {
-                clawServoright.setPosition(closed);
-                clawServoleft.setPosition(closed);
-            } else {
-                switch (claw_State) {
-                    case "right_open":
-                        clawServoright.setPosition(open);
-                        break;
-                    case "right_close":
-                        clawServoright.setPosition(closed);
-                }
-            }
-        }
+    public void initClaw() {
+        clawServoright = hwMap.get(Servo.class, "servo1");
+        clawServoleft = hwMap.get(Servo.class, "servo2");
+        wristservoright = hwMap.get(Servo.class, "servo3");
+        wristservoleft = hwMap.get(Servo.class, "servo4");
+    }
 
-    public void wrist_servos(String state) {
-        switch (state) {
-            case "stowed":
-                wristservoright.setPosition(stowed_angle);
-            case "parallel_angle":
-                wristservoleft.setPosition(parallel_angle);
-                wristservoright.setPosition(parallel_angle);
+    public void claw_servos(Gamepad gamepad) {
+        if (gamepad.left_trigger == 1) {
+            clawServoright.setPosition(closed);
+            clawServoleft.setPosition(closed);
+        } else if (gamepad.right_trigger == 1) {
+            clawServoright.setPosition(open);
+            clawServoleft.setPosition(open);
+        }
+        if (gamepad.left_bumper) {
+            wristservoleft.setPosition(-0.05);
+            wristservoright.setPosition(-0.05);
+        } else if (gamepad.right_bumper) {
+            wristservoleft.setPosition(0.4);
+            wristservoright.setPosition(0.4);
         }
     }
 }

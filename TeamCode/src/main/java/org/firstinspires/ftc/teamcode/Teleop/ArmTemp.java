@@ -10,9 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ArmTemp {
     private DcMotor armShoulder;
-
     private HardwareMap hwMap;
-
     public ArmTemp(HardwareMap hardMap){
         this.hwMap = hardMap;
     }
