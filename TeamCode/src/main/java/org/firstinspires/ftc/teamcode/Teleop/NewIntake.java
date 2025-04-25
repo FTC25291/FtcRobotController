@@ -25,6 +25,7 @@ public class Intake {
     public Intake(HardwareMap hardMap) {
         this.hwMap = hardMap;
     }
+}
 
     public void initintake() {
         Extend_one = hwMap.get(Servo.class, "servo1");
@@ -32,6 +33,7 @@ public class Intake {
         screw = hwMap.get(Servo.class, "servo3");
         intakeMotor = hwMap.dcMotor.get("intakeMotor");
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+    }
 
     public void intake_servos(Gamepad gamepad) {
         // Manual Controls
@@ -44,6 +46,9 @@ public class Intake {
 
         if (gamepad.x) {
             intakeMotor.setPower(1);
+        }
         if (gamepad.a) {
             screw.setAngle(45);
+        }
+    }
 
