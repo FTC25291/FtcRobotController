@@ -47,3 +47,17 @@ public class Intake {
         if (gamepad.a) {
             screw.setAngle(45);
 
+
+    public void intake_servos(Gamepad gamepad) {
+        // Manual Controls
+        if (gamepad.left_trigger > 0.5) {
+            extend_angle += 0.01;
+        } else if (gamepad.right_trigger > 0.5) {
+            extend_angle -= 0.01;
+        }
+        extend_angle = Math.max(0.82f, Math.min(1, extend_angle));
+
+        if (gamepad.x) {
+            intakeMotor.setPower(1);
+        if (gamepad.a) {
+            screw.setAngle(45);
