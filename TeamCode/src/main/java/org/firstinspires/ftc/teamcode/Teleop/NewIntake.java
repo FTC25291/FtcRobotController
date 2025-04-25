@@ -25,7 +25,6 @@ public class Intake {
     public Intake(HardwareMap hardMap) {
         this.hwMap = hardMap;
     }
-}
 
     public void initintake() {
         Extend_one = hwMap.get(Servo.class, "servo1");
@@ -51,4 +50,4 @@ public class Intake {
             screw.setAngle(45);
         }
     }
-
+}
