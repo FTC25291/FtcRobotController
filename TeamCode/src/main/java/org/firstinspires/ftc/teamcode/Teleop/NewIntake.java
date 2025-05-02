@@ -22,6 +22,8 @@ public class Intake {
 
     private int automationState = 0;  // State variable for automation
 
+    private LimeLight3A limelight;
+
     public Intake(HardwareMap hardMap) {
         this.hwMap = hardMap;
     }
@@ -32,6 +34,10 @@ public class Intake {
         screw = hwMap.get(Servo.class, "servo3");
         intakeMotor = hwMap.dcMotor.get("intakeMotor");
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        limelight = hwMap.get(Limelight3A.class, "limelight");
+        limelight.setPollRateHz(100);
+        limelight.start();
+        limelight.pipelineSwitch(0);
     }
 
     public void intake_servos(Gamepad gamepad) {
@@ -49,5 +55,21 @@ public class Intake {
         if (gamepad.a) {
             screw.setAngle(45);
         }
+
+        //auto alighn if statment
+
+    }
+
+    public double[] getResult() {
+        LLResult result = limelight.getLatestResult();
+        double[] arr = new double[3];
+
+        if (result != null && result.isValid()) {
+            arr[0] = result.getTx(); // How far left or right the target is (degrees)
+            arr[1] = result.getTy(); // How far up or down the target is (degrees)
+            arr[2] = result.getTa(); // How big the target looks (0%-100% of the image)
+        }
+
+        return arr;
     }
 }

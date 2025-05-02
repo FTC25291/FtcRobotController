@@ -1,4 +1,4 @@
-public class Limelight {
+
 
     Limelight3A limelight;
 
@@ -6,8 +6,6 @@ public class Limelight {
     private double ty;
     private double ta;
 
-    @Override
-    public void runOpMode() throws InterruptedException {
 
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
@@ -15,9 +13,6 @@ public class Limelight {
 
         limelight.pipelineSwitch(0);
 
-        waitForStart();
-
-        while (opModeIsActive()) {
 
             LLResult result = limelight.getLatestResult();
 
@@ -26,6 +21,3 @@ public class Limelight {
                 ty = result.getTy(); // How far up or down the target is (degrees)
                 ta = result.getTa(); // How big the target looks (0%-100% of the image)
             }
-        }
-    }
-}
